@@ -60,7 +60,7 @@ This allows for a lot of customization, but also a lot of code. A way around thi
 It's also important to keep in mind that with every Matplotlib wrapper like Seaborn is still often useful to dive into Matplotlib's syntax to adjust the final plot output. And that's it. 
 These are a couple common tools you can use to build data visualizations.
 
-***matplotlib and Seaborn***
+***Matplotlib and Seaborn***
 - Very popular python plotting libraries
 - Matplotlib's API is elatively low-level
 - Seaborn wrapper offers high-level graphics
