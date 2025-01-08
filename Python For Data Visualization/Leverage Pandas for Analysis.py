@@ -180,3 +180,19 @@ df.head()
 del df['Repayment']
 df.head()
 
+## Aggreaget functions
+
+# sum the values in a column
+# total amount of interest paid over the course of the loan
+df['interes_paid'].sum()
+
+# sum all the values across all columns
+df.sum()
+
+# The info method gives the column datatypes + number of nun-null values
+# Notice that we seem to have 60 non-null values for all but the Interest paid column
+df.info()
+
+
+
+
