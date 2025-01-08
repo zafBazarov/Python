@@ -75,8 +75,108 @@ df['car_type'].head()
 df['car_type', 'Principal Paid'].head()
 
 ## Pandas Slicing
-With a pandas
+With a pandas, we can select rows using slicing like this: series[start_index:end_index}
+The end_index is not inclusive. This behavior is very simple to Python lists.
+
+# printing a special column
+  df['car_type']
+
+# slicing a column up 10 rows
+df['car_type'][0:10]
+
+# Selecting Columns using ``loc``
+The pandas attribute .loc allow you to select columns, index, and slice your data.
+
+# pandas dataframe
+df.loc[:, ['car_type']].head
+
+#pandas series
+df.loc[:, 'car_type'].head
 
 
+## Filter and Clean data
 
+# Let's firts start by looking at the car_type column
+# pandas dataframe
+df['car_type'].value_counts()
+
+# Notice that the filter produces a pandas series of True and False values
+car_filter = df['car_type']=='Toyota Sienna'
+car_filter
+
+# Approach 1 using square brackets
+# Filter dataframe to get a DataFrame of only 'Toyota Sienna'
+df[car_filter].head()
+
+# Approach 2 using .loc
+# Filter dataframe to get a DataFrame of only 'Toyota Sienna'
+df.loc[car_filter, :]
+
+# Notice that it looks like nothing changed
+# This is because we did not update the dataframe after applying the filter
+df['car_type'].value_counts()
+
+# Filter dataframe to get a DataFrame of only 'Toyota Sienna'
+df = df.loc[car_filter, :]
+
+df['car_type'].value_counts()
+
+# interest_rate Filter
+
+df['interest_rate'].value_counts()
+
+# Notice that the filter produces a pandas series of True and False values
+df['interest_rate']==0.0702
+
+interest_filter = df['interest_rate']==0.0702
+df=df.loc[interest_filter, :]
+df['interest_rate'].value_counts(dropna=False)
+
+# Combining Filters
+ we know join car_filter and interest_filter filtesr. 
+& = and, | = or,^ ) exclusive or, ~ = not
+df.loc[car_filter & interest_filter, :]
+
+## Renaming and deleting Columns
+It is often the case where you change your column names or remove unnecessary columns. 
+
+***Rename columns***
+
+Here are two popular ways to rename dataframe columns. 
+1. ***dictionary substitution***. very useful if you only want to rename a few of the columns.
+2. ***list replacement***: requires a full list of names (this is more error prone)
+
+# This wont work as there is a spcae in the column name
+# I want to fix that
+df.['Principal Paid']
+
+# Approach 1 dictionary substitution using rename method
+df = df.rename(columns = {'Starting Balance': 'starting_balance',
+                          'Interest Paid': 'interest_paid',
+                          'Principal Paid': 'principal_paid',
+                          'New Balance': 'new_balance'}
+              )
+
+# Approach 2 list replacement
+# Only changing Month -> month, but we need to list the rest of columns
+df.columns = ['month',
+              'starting_balance',
+              'Repayment',
+              'interest_paid',
+              'principal_paid',
+              'new_balance',
+              'term',
+              'interest_rate',
+              'car_type']
+
+## Deleting columns
+
+# Approach 1
+# This approach allows yu to drop multiple columns at a time
+df = df.drop(columns=['term'])
+df.head()
+
+# Approach 2 use the del command
+del df['Repayment']
+df.head()
 
