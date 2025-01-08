@@ -45,3 +45,38 @@ df.shape()
 # The infor method gives the column datatype + number of non-null values
 # Notice that we seem to have 405 non-null values for all but the Interest Paid column.
 df.info()
+
+# Simplify with slicing
+
+# When working with large data sets often yoe are only interested in a smaller subset of your data.
+
+## Slicing
+1. How to select columns in pandas
+2. How to use slicing operations in pandas
+
+## Select columns using brackets
+With square brackets, you can select on or mor columns. 
+
+# Select one column using double brackets
+df[['car_type']].head()
+
+# Select multiple columns using double brackets
+df[['car_type', 'Principal Paid']].head()
+
+# This is a Pandas DataFrame
+type(df[['car_type']].head())
+
+# Select one column using single brackets
+# This procedure a pandas series which is a one-dimensional array which can be labeled 
+df['car_type'].head()
+
+# Keep in mind that you can't select multiple columns using single brackets
+# This will result in a KeyError
+df['car_type', 'Principal Paid'].head()
+
+## Pandas Slicing
+With a pandas
+
+
+
+
