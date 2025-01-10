@@ -215,9 +215,117 @@ When working with a dataset we will often run into missing values
 
 ***Before you can graph data, you need to make sure there are no missing values***
 
-
+# Finding Missing Values
 df.info
 
+Two common methods to indicate where values in a DataFrame are missing are ``isna`` and ``isnull``. They are exactly the same methods, but with different names. 
+The reason why this is the case is in the R language, NA and null are two different things. This is to make our programmers have an easier time when working with Python. I tend to prefer isna as this tends to be similar in naming to other Python methods.
+
+As you see it in the code over here I have the Panda Series interest_paid. I'm using the isna method, and what this does is this is producing a Panda Series of true and false values. It'll be true where I have a NaN value, and it'll be false where I don't.
+
+# Notice wew have a Pandas Series of True and False values
+df['interest_paid'].isna().head()
+
+The next thing I'm doing is I'm assigning this true and false filter to the variable interest_missing. And the reason why I'm doing this is I want to take that filter and eventually use it to isolate my missing data. 
+What the code here is doing is I want to look at the row where I have the missing values. 
+
+# Filtiring based on misssing values
+interest_missing = df['interest_paid'].isna()
+
+# Looks at the row that contains NaN for interest_paid
+df.loc[interest_missing]
+
+And what you see here is I have a missing value in the interest paid column. This will be a problem for later. 
+
+It's important to keep in mind, that you can also use the knot operator to negate the filter so that every row that's returned doesn't have a NaN. And as you see in the Pandas DataFrame, the row with index 35 is no longer here. 
+
+# Keep in mind that we can use the not operator (~) to negate the filter
+# every row that doesn't have a nan is returned.
+df.loc[~interest_missing,:]
+
+It's important to note, you'll often see code similar to what you see here.What we have is that same Pandas filter of true and false values. And then after, you have the aggregate function sum, which then sums all the true and false values to produce a result. The reason why this works is in Python, Boolean are a subtype of integer where true are ones and falses are zero.  
+
+# The code counts the number of missing values
+# sum() works because Booleans are a subtype of integers.
+df['interest_paid'].isna().sum()
 
 
+When working with a dataset, it's important to identify your missing values, as missing values can cause data misinterpretation errors, or even cause you an error when you try to graph your data.
 
+# Remove or fill the missing data
+
+It's really important to either remove that data or fill in the missing data with a reasonable value. This is a really important subject, as before you can graph data, you need to make sure you aren't trying to graph some missing values, as that can cause an error or cause a misinterpretation of the data. 
+
+We're working with the car loan dataset and the first thing we're going to do is we're going to utilize the info method. And what the info method does is it shows us how many missing values we have in each of our columns. 
+
+# identifying missing values
+df.info()
+
+And as you see, we have 60 non-null values for every column except for the interest paid column. This means that we have one null value. 
+
+There are a couple different ways to deal with missing data. The first way is simply to remove the missing values. And in pandas you can remove the missing values by using the drop NA method. And what the code here does is I have a pandas data frame from index 30 up until, but not including index 40, and I'm dropping the rows where I have any NAN values. And as you see here, I don't have a row at index 35 because I had a NAN value here. 
+
+# Remove Missing Values
+
+# You can drop entire rows if they contain 'any' NaNs in them or 'all'
+# this may not be the best strategy for our dataset
+df[30:40].dropna(how = 'any')
+
+#Filling in Missing Values
+The other way to deal with missing values is simply to fill them in and there are a variety of ways to fill in missing values. 
+
+The first thing we're going to do is we're going to look at where the missing data is located by using a pandas series and then slicing it to look at indexes 30 up until, but not including index 40. As you see here, I have a NAN at index 35. 
+
+# Looking at where missing data is located
+df['interest_paid'][30:40]
+
+The first thing we're going to try is we're going to try to fill the NAN with a zero by using the fill NA method. The reason why filling in a NAN with a zero is often not a good idea, is originally the NAN could have been something else. A zero could help you misinterpret the data. It's just one option. 
+
+# Filling in the NaaN with a zero is probably a bad idea
+df['interest_paid'][30:40].fillna(0)
+
+The other method we could use is to fill in with a ***backfill***. And the way this works is perhaps better to show you. Where at Index 35, before I had a zero or a NAN, now I have an 89.77. This is because the index after it was an 89.77. This is very commonly done with ***time series data*** when you have a missing value. 
+
+# back fill in value
+df['interest_paid'][30:40].fillna(method = 'bfill')
+
+Another way is to ***forward fill*** in your value. And this is also done with ***time series data***. 
+
+# forward fill in value
+df['interest_paid'][30:40].fillna(method = 'ffill')
+
+``The difference between backfill and forward fill is backfill takes the value after the missing value and inserts it at the value that's missing. ``
+
+``And what forward fill does is it takes the value before the missing value and inserts it where the missing value is. ``
+
+***The reason why you use one versus the other is really dependent on your domain knowledge and your application. This is also a current area of research. It's called data imputation. ***
+
+Another way to fill in missing values is through ***linear interpolation***. And what this does is it uses a linear model to fill in the missing value. And as you see here, this 93 is between the 96 and the 89. 
+
+# linear interpolation (filling in NaN of values)
+df['interest_paid'][30:40].interpolate(method = 'linear')
+
+What the code here is doing is I'm finding the total interest paid over the course of a loan by using the sum method. And I should note, the sum method doesn't account for NANs. And as you see here, this is the total amount of money paid toward interest over the course of a loan. It's important to keep in mind that the sum method by default ignores NANs. 
+
+# Interest paid before filling in the NaN with a value
+df['interest_paid'].sum()
+
+So after we fill in the NAN value with a real value, this might change. What the code here is doing is this is producing a Boolean array of true and false values where I'll have a true value where I have a NAN and a false value where I don't, and I'm assigning it to the variable interest_missing. From there, I'm utilizing the LOC operator and filling in that missing N value with the value 93.24. 
+
+# Fill in with the actual value
+interest_missing = df['interest_paid'].isna()
+df.loc[interest_missing, 'interest_paid'] = 93.24
+
+Now, when I sum over the entire column, I'll get a different number. This is perhaps more accurate, and I should note the value of removing or filling in your data is that oftentimes you get more accurate calculations. 
+
+# Interest paid before filling in the NaN with a value
+df['interest_paid'].sum()
+
+In this case, the reason why I filled in the value with 93.24 is because I knew what the actual value should have been. This is due to my domain knowledge of loans. For whatever application you're working with, it's often best to try to get the most accurate value to fill in for your missing values. 
+
+And as you can see here, we don't have NAN values in the data frame anymore. 
+
+# Notice we dont have NaN values in the DataFrame anymore
+df.info()
+
+Once you've identified your missing values, removing them or filling them in often gives you more accurate calculations and makes the results more interpretable.
