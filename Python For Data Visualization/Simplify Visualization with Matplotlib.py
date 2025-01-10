@@ -113,7 +113,7 @@ plt.plot(month_number, principal_paid)
 We've gone over how to use Matplotlib.plyplot to make line graphs. And we saw how when you change style, you can make your graphs more aesthetically pleasing.
 
 _____
-***2. Set marker type and colors***
+#2) Set marker type and colors
 
 ``Marker type``
   
@@ -151,3 +151,45 @@ Keep in mind that this `c`` parameter also accepts rgb tuples
 # (0, 0, 1) is blue
 plt.plot(month_number, interest_paid, c=(0, 0, 0), marker = '.', marksize = 10)      # k = black color
 plt.plot(month_number, principial_paid, c=(0, 0, 1), marker = '.', marksize = 10)    # b = blue color
+
+# 3) MATLAB-style vs. object syntax
+
+A potentially confusing part of the Matplotlib library is that ``it has two different styles of syntax``. 
+
+**MATLAB style**, this is a scripted interface designed to feel like MATLAB, where Matplotlib maintains a pointer to the current (active) figure and sends commands to it. 
+
+***Object oriented syntax***, this is more often used in situations where you want more control over your figure. 
+
+``Important note``: you can and often will have plots that will be created through a combination of the MATLAB style and the object-oriented style.`` 
+
+
+**MATLAB style**
+We'll start by looking at the MATLAB style syntax, and this typically starts by using the PLT plot command, where you have something in the x axis, you have something in the Y axis, and you have a bunch of parameters that you set. In this case, I'm setting the parameter C, which is color equal to K, which is the color black, and you can also have additional PLT dot plot commands to plot on top of the figure. And you can see the result here. 
+
+# MATLAB style
+plt.style.use('seaborn')
+
+plt.plot(month_number, interest_paid, c='k')      # k = black color
+plt.plot(month_number, principial_paid, c='b')    # b = blue color
+
+***Object oriented syntax***
+The object oriented syntax is as follows. You have PLT subplots. In this case, I just want one plot, so I'm making n rows equal to one and n columns equal to one, and this returns a topple. And I'm topple unpacking the figure and the axes. And then from there, I'm just doing axes plot what I want in the X axis, what I want in the Y axis, and additional other parameters. Similar to the MATLAB style syntax, you can also plot additional things on the same plot. 
+
+# tuple unpacking
+x, y = (3, 9)
+
+# Object oriented syntax
+fig, axes = plt.subplots (nrows = 1, ncols = 1)
+axes.plot(month_number, interest_paid, c='k')      # k = black color
+axes.plot(month_number, principial_paid, c='b')    # b = blue color
+
+**Combination**
+It's important to note that you can and often will see the MATLAB style and the object oriented style used together. So in this case, I have the object oriented style, I have the MATLAB style, and I have the object-oriented style, and it still produces the same plot. 
+
+# Combination
+fig, axes = plt.subplots (nrows = 1, ncols = 1)
+plt.plot(month_number, interest_paid, c='k')      # k = black color
+axes.plot(month_number, principial_paid, c='b')    # b = blue color
+
+
+There are two separate styles of Matplotlib syntax. There's a MATLAB style and there's the object-oriented style, and that sometimes they're used in combination with each other.
