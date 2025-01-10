@@ -180,6 +180,8 @@ df.head()
 del df['Repayment']
 df.head()
 
+
+
 ## Aggreaget functions
 
 # sum the values in a column
@@ -189,9 +191,32 @@ df['interes_paid'].sum()
 # sum all the values across all columns
 df.sum()
 
+# NOtice that by default it seems like the sum function ignores missing values.
+help(df['interest_paid'].sum)
+
 # The info method gives the column datatypes + number of nun-null values
 # Notice that we seem to have 60 non-null values for all but the Interest paid column
 df.info()
+
+
+## Identify missing data
+When working with a dataset we will often run into missing values
+
+***Missing Data***
+  - Hint at data collection errors
+  - Indicate improper conversion or manipulation
+  - Not actually be considered missing
+
+***Missing Data*** may be listed: 
+- Zero
+- False
+- Not applicable
+- Entered an empty string
+
+***Before you can graph data, you need to make sure there are no missing values***
+
+
+df.info
 
 
 
