@@ -329,3 +329,32 @@ And as you can see here, we don't have NAN values in the data frame anymore.
 df.info()
 
 Once you've identified your missing values, removing them or filling them in often gives you more accurate calculations and makes the results more interpretable.
+
+# Convert pandas DataFrames
+
+When working with Pandas DataFrames, you'll oftentimes find you want to convert them to NumPy arrays or Python dictionaries. ``The reason why is because certain libraries prefer NumPy rays or Python dictionaries as inputs to their methods as opposed to Pandas DataFrames.``
+
+In this video, we'll work with the car loan dataset again, and we're going to look at the first five rows. There are two ways to convert Pandas DataFrames to NumPy arrays. 
+
+df.head()
+
+***Convert Pandaas DataFrames to NumPy arrays***
+The first approach is to use the two underscore NumPy method, and what this outputs is a NumPy array. 
+
+# Approach 1 
+df.to_numpy()
+
+The second approach is to use the values attribute, and this also produces a NumPy array. I should note that either of these approaches works just as well as the other. 
+
+#Approach 2
+df.values
+
+***Convert Pandaas DataFrames to Dictionaries***
+
+You can also convert Pandas DataFrames to Python dictionaries. You can do this by using the two underscore dict method, and the reason why you'd want to do this versus convert your Pandas DataFrame to a NumPy array is oftentimes you're interested in preserving the indices of your Pandas DataFrame. 
+
+df.to_dict()
+
+``The practicality of this is that sometimes certain libraries don't accept Pandas DataFrames as inputs to their methods.``
+
+
