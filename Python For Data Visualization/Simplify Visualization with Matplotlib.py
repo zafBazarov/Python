@@ -112,7 +112,42 @@ plt.plot(month_number, principal_paid)
 
 We've gone over how to use Matplotlib.plyplot to make line graphs. And we saw how when you change style, you can make your graphs more aesthetically pleasing.
 
+_____
+***2. Set marker type and colors***
+
+``Marker type``
+  
+  Here are a couple common marker types: 
++++++picture
+
+In this graph we are graphing month number versus interested_paid and month number versus principial_paid. We put '.' marker and its size to 10. 
+
+plt.style.use('seaborn')
+
+plt.plot(month_number, interest_paid, marker = '.', marksize = 10)      # x=month_number, y=interest_paid, marker
+plt.plot(month_number, principial_paid, marker = '.', marksize = 10)
 
 
+``Change Color``
 
+The ``c`` parameter accepts strings. Also parameter accepts hex strings. For instance, green is '#008000'. Additionally, we can use rgd tuples: 
+++++++picture
 
+# string color
+plt.plot(month_number, interest_paid, c='k', marker = '.', marksize = 10)      # k = black color
+plt.plot(month_number, principial_paid, c='b', marker = '.', marksize = 10)    # b = blue color
+
+Keep in mind that this `c`` parameter also takes hex strings
+
+# Using hex strings
+# '#000000' is black
+# '#0000FF' is blue
+plt.plot(month_number, interest_paid, c='#000000', marker = '.', marksize = 10)      # k = black color
+plt.plot(month_number, principial_paid, c='0000FF', marker = '.', marksize = 10)    # b = blue color
+
+Keep in mind that this `c`` parameter also accepts rgb tuples
+# Using rgb tuples
+# (0, 0, 0) is black
+# (0, 0, 1) is blue
+plt.plot(month_number, interest_paid, c=(0, 0, 0), marker = '.', marksize = 10)      # k = black color
+plt.plot(month_number, principial_paid, c=(0, 0, 1), marker = '.', marksize = 10)    # b = blue color
