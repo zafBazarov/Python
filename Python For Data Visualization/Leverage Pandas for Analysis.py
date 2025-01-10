@@ -358,3 +358,33 @@ df.to_dict()
 ``The practicality of this is that sometimes certain libraries don't accept Pandas DataFrames as inputs to their methods.``
 
 
+# Export pandas DataFrames
+
+When working with Panda's DataFrames it's often a good idea to export them to either CSV or Excel files. This is because it's a great way to share your results with others. 
+
+***Export Pandas DataFrames to csv and excel files
+In Pandas, you can export your DataFrame to a CSV file by using the to_CSV method. 
+
+In this case, I have a relative path where inside my current working directory, there's a folder called data, and inside that folder is where I'm exporting the CSV file. The parameter index equals false, just means I don't want to export the Pandas DataFrames indexes. 
+
+# Export DataFrame to csv file
+df.to_scv(path_orbuf = 'data/table.csv',
+          index = False)
+
+You can export your DataFrame to an Excel file by using the to_Excel method. And in this case, I have a relative path where inside my current directory, there's a folder called data, and then inside that folder is where I'm writing the Excel SX file. The index equals false parameter, just means I don't want to have the indexes from my DataFrame export to the file. 
+
+# Export DataFrame to excel file
+df.to_scv(path_orbuf = 'data/table.csv',
+          index = False)
+
+And keep in mind, if you ever don't know what a method does, you can always look them up using the help command. In this case, I'm looking up the to_CSV method. 
+
+#Keep in mind that if you do not know a methods parameters,
+# you can look them up using the help command
+
+help(df.to_csv)
+
+It's also a good idea to check your exported files, in the sense that sometimes, when you export a file, it may not always be what you expect.
+
+table = pd.read_csv('tabel.csv')
+print(table)
