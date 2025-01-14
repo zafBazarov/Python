@@ -300,7 +300,7 @@ axes.set_ylabel('Dollars');
 axes.set_title('Interest and Principal paid Each Month');
 
 ``Changing Fontsize``
-And as before, you can change the font size by adding the font size parameter. One difference with the object-oriented style is that you have to do axes.tick_params to change the tick font size. In this case, I'm changing the tick font size for the x-axis, making them font size of 20, in this case, it's called label size. And for the y ticks, I simply change axes to make it equal to the string y and make the label size equal to 20. In this video, I went over how to change the titles, labels, and limits for both Matplotlib styles of syntax. The benefit of this is that having labels, limits, and titles can make your graphs more interpretable and easier to understand.
+And as before, you can change the font size by adding the font size parameter. One difference with the object-oriented style is that you have to do axes.tick_params to change the tick font size. In this case, I'm changing the tick font size for the x-axis, making them font size of 20, in this case, it's called label size. And for the y ticks, I simply change axes to make it equal to the string y and make the label size equal to 20. 
 
 # fontsize change
 fig, axes=plt.subplots(nrows = 1, ncols = 1)
