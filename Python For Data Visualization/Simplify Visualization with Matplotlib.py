@@ -458,3 +458,88 @@ fig, axes = plt.subplots(nrows = 1, ncols = 1);
 axes.plot(month_number, interest_paid, c='k', label = 'Interest')
 axes.plot(month_number, principial_paid, c='k', label = 'Principal')
 axes.legend( loc = (1.02, 0) )
+
+# 7) Save Plots
+
+Saving your visualizations outside your Jupyter Notebook is important as it allows you to show your visualizations to others. Equally important is ``checking your saved visualization because there's always a possibility the graph doesn't look the same in the notebook`` as in the image file. 
+
+So the first thing we're going to do is for this notebook, we're going to use a seaborn style in Matplotlib. This will make our graph more aesthetically pleasing. Using the MATLAB style of Matplotlib, we're going to save our file using plt.savefig. This is where we're saving our image. This is our DPI, you can think of it as resolution, and it's really important now that we have this outputted image in our Jupyter Notebook, let's now see how the image saved. Let's start by looking inside the Images folder for the filename MS Legend Cutoff. You'll see that the legend is cut off here. This is obviously a problem. You'll also notice that it looks like month is almost cut off here. 
+
+pl.style.use('seaborn')
+
+***MATLAB-style***
+
+# an image may good in the notebook, but it may not save that way
+plt.figure(figsize=10,5))
+plt.plot(month_number, principal_paid, c= 'b', label = 'Principal')
+plt.plot(month_number, interest_oaid, c = 'k', label = 'Interest')
+plt.xticks(fontsize = 20)
+plt.yticks(fontsize = 20) 
+plt.xlim(left =1, right =61)
+plt.ylim(bottom =0, to =700)
+plt.xlabel('Month', fontsize =22);
+plt.ylabel('Dollars', fontsize =22);
+plt.title('Interest and principal Paid Each Month', fontsize =24)
+plt.legend(loc =(1.02, 0), borderaxespad =0, fontsize =20)
+
+plt.savefig('images/mslegendcutoff.png', dpi = 300)  # dpi = resolution
+
+
+Let's now learn how to fix this. So we're going to head back over to our Jupyter Notebook. The way we're going to solve this problem is we're going to utilize the plt.layout method. What this does is it automatically adjusts subplot parameters so that the subplot fits into the figure area. And we run the same code before with this new addition. And here we have the figure. 
+Now looking inside the Images folder, we now see that the image is not cut off. 
+
+# tight_layout()
+# automatically adjusts subplot params so that the subplot(s) fits in to the figure area
+plt.figure(figsize=10,5))
+plt.plot(month_number, principal_paid, c= 'b', label = 'Principal')
+plt.plot(month_number, interest_oaid, c = 'k', label = 'Interest')
+plt.xticks(fontsize = 20)
+plt.yticks(fontsize = 20) 
+plt.xlim(left =1, right =61)
+plt.ylim(bottom =0, to =700)
+plt.xlabel('Month', fontsize =22);
+plt.ylabel('Dollars', fontsize =22);
+plt.title('Interest and principal Paid Each Month', fontsize =24)
+plt.legend(loc =(1.02, 0), borderaxespad =0, fontsize =20)
+
+plt.tight_layout()
+plt.savefig('images/mslegend.png', dpi = 300)  # dpi = resolution
+
+***Object-orientid***
+
+Now there's another way to do this and that's by using the object-oriented Matplotlib syntax. And the only thing that differs is instead of doing plt.savefig, we now have fig.savefig. And in this image, it'll be cut off just like we had before. So inside the Images folder, we can look for Object Legend Cutoff. And as you see here, the legend's still cut off and the month is still cut off. So let's fix that. 
+
+# an image may good in the notebook, but it may not save that way
+
+fig, axes = plt.subplots(nrows =1, ncols =1, figsize =(10,5))
+axes.plot(month_number, principal_paid, c= 'b', label = 'Principal')
+axes.plot(month_number, interest_oaid, c = 'k', label = 'Interest')
+axes.xticks(fontsize = 20)
+axes.yticks(fontsize = 20) 
+axes.xlim(left =1, right =61)
+axes.ylim(bottom =0, to =700)
+axes.xlabel('Month', fontsize =22);
+axes.ylabel('Dollars', fontsize =22);
+axes.title('Interest and principal Paid Each Month', fontsize =24)
+axes.legend(loc =(1.02, 0), borderaxespad =0, fontsize =20)
+
+plt.savefig('images/objectlegendcutoff.png', dpi = 300)  # dpi = resolution
+
+The way to fix this is by doing fig.tight_layout. Let's go ahead and run that. And now you'll notice in our Images folder, the objectlegend.png file doesn't have anything cut off. And here's the image. It looks like nothing's cut off. And that's it, the next time you want to export your images, consider using some of these techniques.
+
+# tight_layout()
+# automatically adjusts subplot params so that the subplot(s) fits in to the figure area
+fig, axes = plt.subplots(nrows =1, ncols =1, figsize =(10,5))
+axes.plot(month_number, principal_paid, c= 'b', label = 'Principal')
+axes.plot(month_number, interest_oaid, c = 'k', label = 'Interest')
+axes.xticks(fontsize = 20)
+axes.yticks(fontsize = 20) 
+axes.xlim(left =1, right =61)
+axes.ylim(bottom =0, to =700)
+axes.xlabel('Month', fontsize =22);
+axes.ylabel('Dollars', fontsize =22);
+axes.title('Interest and principal Paid Each Month', fontsize =24)
+axes.legend(loc =(1.02, 0), borderaxespad =0, fontsize =20)
+
+fig.tight_layout()
+plt.savefig('images/objectlegend.png', dpi = 300)  # dpi = resolution
