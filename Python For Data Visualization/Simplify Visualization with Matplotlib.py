@@ -543,3 +543,46 @@ axes.legend(loc =(1.02, 0), borderaxespad =0, fontsize =20)
 
 fig.tight_layout()
 plt.savefig('images/objectlegend.png', dpi = 300)  # dpi = resolution
+
+
+# 8) Create plots with Matplotlib wrappers
+
+``Matplotlib is a very popular data visualization library, but definitely has its flaws.`` 
+
+Matplotlib defaults are not ideal. There's no grid lines, there's a white background, et cetera. The libraries also relatively low level, so doing anything complicated takes quite a bit of code. 
+
+***Matplotlib Flaws***
+- No gridlines
+- Library is low level
+- Lack of integration with Pandas data structures
+
+
+We are going to make a more complicated visualization called a boxplot to show how helpful it is to work with the Matplotlib wrappers, pandas and seaborn. But first, we have to know what a boxplot is. 
+
+``Boxplot``
+And a boxplot is a standardized way of displaying the distribution of data based on a five-number summary. The "minimum", the first quartile, the median, the third quartile, and the maximum. A boxplot can tell you by your outliers and what their values are. It can also tell you if your data is symmetrical, how tightly your data is grouped, and if and how your data is skewed. If you want to learn more about boxplots, you can learn more here: https://builtin.com/data-science/boxplot
+
+Boxplot Advantages:
+- Tells you the values of your outliers
+- Identical if your data is symmetrical
+- Determine how tightly data is grouped
+- See if your data is skewed
+
+***Load Data***
+
+The data we're going to use to demonstrate boxplots is the Breast Cancer Wisconsin Diagnostic Data Set. The goal of the visualization is to show how the distributions for the column area_mean differs for benign versus malignant diagnosis. So the first thing have to do is you have to load our data into a pandas data frame. So here is a relative path and inside the data folder, there's the Wisconsin Breast Cancer CSV file. And we're putting this into a pandas data frame, cancer_df. As we're looking at the first five rows of the dataset, notice how we want to find how the column area_mean differs for diagnosis of malignant versus benign. If we're looking at the distribution of the dataset in terms of diagnosis, notice that we have a significant amount of benign and malignant cancer diagnosis. 
+
+# Load wisconsin breast cancer dataset
+# either benign or malignant
+
+cancer_df = pd.read_csv('data/wisconsinBreastCancer.csv')
+
+cancer_df.head()
+
+# Looking at the Distribution of the dataset in terms of Diagnosis
+cancer_df['diagnosis'].value_counts(dropna = False)
+
+***PLotting suing Pandas***
+
+Before we can make a boxplot using Matplotlib, we have to isolate our malignant diagnosis and our benign diagnosis. And what the code over here is doing is if a filter for malignant and have a filter for benign, and so this and this, they're just pandas series for area_mean for benign diagnosis and malignant. And what the values attribute does is it just turns this pandas series into a NumPy array. And then from here, you do plt.boxplot. You have one of your NumPy arrays, you have your other, and then you have a label for each of your NumPy arrays. As you see here, we don't have the prettiest boxplot, but it's pretty clear there's a significant difference between malignant and benign in terms of area mean. You can also create a boxplot using pandas, and one reason why you might want to use pandas is that it requires less code. For the code over here, all you have to do is have the name of your data frame. In this case, cancer_df. Use the boxplot method. Specify you want to look at the area_mean column and you want to separate it out by diagnosis. As you see in this image, it was less code to create the boxplot. It looks like there's something weird going on over here. And one important point to mention is that sometimes even if you're using pandas as a wrapper around Matplotlib, oftentimes you can also incorporate Matplotlib syntax to adjust the final plot. And the code below removes the titles using pure Matplotlib syntax. You can also make boxplots using the seaborn library, and seaborn can be seen as a wrapper on top of Matplotlib. And seaborn's website lists a bunch of advantages of using seaborn, including close integration with pandas data structures, a dataset oriented API for examining relationships between multiple variables, specialized support for using categorical variables to show observations or aggregate statistics, concise control over Matplotlib figure styling with several built-in themes, and tools for choosing color palettes that faithfully reveal patterns in your data. The first thing you have to do if you want to use seaborn is import seaborn. I'm importing seaborn as SNS. And over here, I'm using the boxplot method where I'm passing in the cancer data frame into the parameter data and I'm looking at the diagnosis column versus the area mean column. And I'll press Shift + Enter. And then what you see here is that unlike the plots from before, this is more colorful, but perhaps more importantly, the malignant and the benign boxplots are closer together so it's easier to make a comparison between the two of them. In this video, I showed you how to use two Matplotlib wrappers, pandas, which is normally used for data manipulation, can also be used for data visualization, and seaborn, which makes plotting in Matplotlib a lot easier.
+
