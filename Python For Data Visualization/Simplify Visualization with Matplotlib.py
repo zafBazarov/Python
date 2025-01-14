@@ -320,3 +320,89 @@ axes.set_ylabel('Dollars', fontsize=22);
 axes.set_title('Interest and Principal paid Each Month', fontsize=22);
 axes.tick_params(axis = 'x', labelsize = 20)
 axes.tick_params(axis = 'y', labelsize =20)
+
+# 5) Grids
+
+Grid lines can't be visually appealing, but they could also help you determine fine differences between two quantities in a graph. 
+
+
+The first thing we're going to do is we're going to create a plot without grid lines where we have month number in the x-axis, interest paid in the y-axis, and then we have a secondary y-axis where we have month number in the x-axis and principal paid in the y-axis, and we're going to plot it. This is the graph without grid lines. 
+
+plt.plot(month_number, interest_paid, c='k')
+plt.plot(month_number, principial_paid, c='k')
+
+***MATLAB-style***
+So now let's see how it looks with grid lines. In the MATLAB-style syntax in Matplotlib, you can add grid lines by using .grid. And as you can see, we have grid lines here. 
+
+plt.plot(month_number, interest_paid, c='k')
+plt.plot(month_number, principial_paid, c='k')
+plt.grid()
+
+``Horizontal grid lines``
+Keep in mind, you can also only have horizontal grid lines by specifying axis equals y and you can also only have vertical grid lines by specifying axis equals x. 
+
+# only horizontal grid lines
+plt.plot(month_number, interest_paid, c='k')
+plt.plot(month_number, principial_paid, c='k')
+plt.grid(axis = 'y')
+
+``Vertical grid lines``
+# only horizontal grid lines
+plt.plot(month_number, interest_paid, c='k')
+plt.plot(month_number, principial_paid, c='k')
+plt.grid(axis = 'x')
+
+``Grid color, lines and transpareny change``
+If you want more customization, you can also change the color of your grid lines. You can change the transparency of your grid lines. And keep in mind for alpha, lower means more transparent and up to one means not transparent at all. You can also change the line style of your grid lines, and this is not going to look too good because the green seems to really clash with the blue here. 
+
+# change color of grid lines, transparency, and lifestyle
+plt.plot(month_number, interest_paid, c='k')
+plt.plot(month_number, principial_paid, c='k')
+plt.grid( c='g',              # color
+          alpha = .9,          # transparency
+          linestyle = '-')    # line
+
+***Object-orientid**
+
+You can also add grid lines using the Matplotlib object-oriented syntax where you just do axes.grid. 
+
+fig, axis = plt.subplots(nrows = 1, nclos = 1);
+axes.plot(month_number, interest_paid, c = 'k');
+axes.plot(month_number, principal_paid, c = 'b');
+axes.grid()
+
+You can also specify that you only want horizontal grid lines by doing axis equals y. 
+
+# only horizontal grid lines
+fig, axis = plt.subplots(nrows = 1, nclos = 1);
+axes.plot(month_number, interest_paid, c = 'k');
+axes.plot(month_number, principal_paid, c = 'b');
+axes.grid( axis = 'y')
+
+You can also specify that you just want vertical grid lines by setting axis equals to x. 
+
+# only vertical grid lines
+fig, axis = plt.subplots(nrows = 1, nclos = 1);
+axes.plot(month_number, interest_paid, c = 'k');
+axes.plot(month_number, principal_paid, c = 'b');
+axes.grid( axis = 'x')
+
+And similar to the MATLAB-style syntax, you can also specify what color you want your grid lines to be, how transparent you want them, and the line style. 
+
+# change color of grid lines, transparency, and lifestyle
+fig, axis = plt.subplots(nrows = 1, nclos = 1);
+axes.plot(month_number, interest_paid, c = 'k');
+axes.plot(month_number, principal_paid, c = 'b');
+axes.grid( c='g',              # color
+          alpha = .9,          # transparency
+          linestyle = '-')    # line
+
+Keep in mind if you're finding setting grids to be tedious, use a style that already has grids in them by default. For example, the seaboard style has white grid lines by default as you can see here.
+
+# if you're finding setting grids to be tedious, use a style that already has grids
+plt.style.use('seaborn')
+fig, axis = plt.subplots(nrows = 1, nclos = 1);
+axes.plot(month_number, interest_paid, c = 'k');
+axes.plot(month_number, principal_paid, c = 'b');
+
+Matplotlib allows you to set grid lines to make your graph more visually appealing and to help distinguish quantities across the graph. It's also important to keep in mind that just because you can set grid lines doesn't mean you have to. You can also use a style of Matplotlib that has them in by default.
