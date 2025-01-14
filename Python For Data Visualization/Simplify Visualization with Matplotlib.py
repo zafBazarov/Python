@@ -193,3 +193,130 @@ axes.plot(month_number, principial_paid, c='b')    # b = blue color
 
 
 There are two separate styles of Matplotlib syntax. There's a MATLAB style and there's the object-oriented style, and that sometimes they're used in combination with each other.
+
+# 4) Set titles, labels, and limits
+
+
+
+Plot titles and plot labels are very important to convey what you're graphing and plot limits are very important as, oftentimes, the default limits aren't always ideal with Matplotlib. 
+
+***MATLAB-style***
+
+The first thing we're going to do is we're going to go for the MATLAB style for how to set plot titles, labels, and limits. So here's a normal MATLAB-style plot. Notice in the graph that there's no title in the plot. There's no y label, there's no x label, and the limits could be a little bit better on the x-axis where it looks like the plot should start at one and should end at 60. 
+
+plt.plot(month_number, interest_paid, c='k')
+plt.plot(month_number, principal_paid, c='b')
+
+***Set xlim and ylim***
+To change the x limit and the y limit, you can do .xlim where you have your limit on the left and your limit on the right. To change your y limit, you can do .ylim, you can have your lower limit and you can have your upper limit. And obviously, this is not the most practical use of changing the y limit, as before, it looked a little bit better. 
+
+# This isn't the most practical use of changing ylim
+plt.plot(month_number, interest_padi, c='k')
+plt.plot(month_number, principal_paid, c='b')
+plt.xlim(left=1, right=70)
+plt.ylim(bottom=0, top=1000)
+
+***Set xlabel and ylabel
+You can also set your x label and y label. To set your x label, you can do .xlabel and the name you want for your x label. For your y label, you can do .ylabel and the name you want for your y label. And as you see here, we have something on our y-axis now and something on our x-axis. 
+
+# Obviously this isn't the most practical and use of changing xlim and ylim
+plt.plot(month_number, interest_paid, c='k')
+plt.plot(month_number, principal_paid, c='b')
+plt.xlabel('Month')
+plt.ylabel('Dollars')
+
+***Set Title***
+To set the title, you can do plt.title and the name of your title. And as you can see, we have our title here now in addition to our y label and our x label. 
+
+# set title
+plt.plot(month_number, interest_paid, c='k')
+plt.plot(month_number, principal_paid, c='b')
+plt.xlabel('Month')
+plt.ylabel('Dollars')
+plt.title('Interest and Principal paid Each Month')
+
+***Changing Fonstsize***
+If you find that your x label, y label, or your title have too small of a font, you can always make it bigger by adjusting the font size. In this case, I clearly made it too big, so feel free to play around with the parameters, and you can continue to iterate on this almost indefinitely, and that looks a lot better. 
+
+# fontsize change
+plt.plot(month_number, interest_paid, c='k')
+plt.plot(month_number, principal_paid, c='b')
+plt.xlabel('Month', fontsize=22)
+plt.ylabel('Dollars', fontsize=22)
+plt.title('Interest and Principal paid Each Month', fontsize=22)
+
+***Changing tick font size***
+You can also change the size of your x ticks using .xticks and your y ticks using .yticks. So notice now that the title is too big, the x and y label is too big, as well as the x ticks and y ticks, so feel free to iterate. ``Graphing is a very iterative process. ``
+
+#tick change
+plt.plot(month_number, interest_paid, c='k')
+plt.plot(month_number, principal_paid, c='b')
+plt.xlabel('Month', fontsize=22)
+plt.ylabel('Dollars', fontsize=22)
+plt.title('Interest and Principal paid Each Month', fontsize=22)
+plt.xtocks(fontsize =20)
+plt.yticks(fontsize=20)
+
+
+***Object-orientid***
+
+The object-oriented approach for changing the titles, the labels, and limits is very similar.
+
+fig, axes=plt.subplots(nrows = 1, ncols = 1)
+axes.plot(month_number, interst_paid, c='k');
+axes.plot(month_number, principal_paid, c='b');
+
+``Set xlim and ylim``
+
+Where I first have a graph, setting the x limits and the y limits is very similar to before. Where before I did plt.xlim, now I have axes.set_xlim, and I have axes.set_ylim for the y limits. 
+
+# set xlim and ylim
+fig, axes=plt.subplots(nrows = 1, ncols = 1)
+axes.plot(month_number, interst_paid, c='k');
+axes.plot(month_number, principal_paid, c='b');
+axes.set_xlim(left =1, right =70)
+axes.set_ylim(bottom =0, top =1000)
+
+
+``Set xlabel and ylabel``
+Setting the x label and the y label is also a similar process to the MATLAB style. Where before I had plt.xlabel and plt.ylabel, now I have axes.set_xlabel and axes.set_ylabel. 
+
+# set xlab and ylab
+fig, axes=plt.subplots(nrows = 1, ncols = 1)
+axes.plot(month_number, interst_paid, c='k');
+axes.plot(month_number, principal_paid, c='b');
+axes.set_xlabel('Month');
+axes.set_ylabel('Dollars');
+
+``Set title``
+Similarly, before with the MATLAB style, I had plt.title and now I have axes.set_title. 
+
+# set title
+fig, axes=plt.subplots(nrows = 1, ncols = 1)
+axes.plot(month_number, interst_paid, c='k');
+axes.plot(month_number, principal_paid, c='b');
+axes.set_xlabel('Month');
+axes.set_ylabel('Dollars');
+axes.set_title('Interest and Principal paid Each Month');
+
+``Changing Fontsize``
+And as before, you can change the font size by adding the font size parameter. One difference with the object-oriented style is that you have to do axes.tick_params to change the tick font size. In this case, I'm changing the tick font size for the x-axis, making them font size of 20, in this case, it's called label size. And for the y ticks, I simply change axes to make it equal to the string y and make the label size equal to 20. In this video, I went over how to change the titles, labels, and limits for both Matplotlib styles of syntax. The benefit of this is that having labels, limits, and titles can make your graphs more interpretable and easier to understand.
+
+# fontsize change
+fig, axes=plt.subplots(nrows = 1, ncols = 1)
+axes.plot(month_number, interst_paid, c='k');
+axes.plot(month_number, principal_paid, c='b');
+axes.set_xlabel('Month', fontsize=22);
+axes.set_ylabel('Dollars', fontsize=22);
+axes.set_title('Interest and Principal paid Each Month', fontsize=22);
+
+# tick change
+# fontsize change
+fig, axes=plt.subplots(nrows = 1, ncols = 1)
+axes.plot(month_number, interst_paid, c='k');
+axes.plot(month_number, principal_paid, c='b');
+axes.set_xlabel('Month', fontsize=22);
+axes.set_ylabel('Dollars', fontsize=22);
+axes.set_title('Interest and Principal paid Each Month', fontsize=22);
+axes.tick_params(axis = 'x', labelsize = 20)
+axes.tick_params(axis = 'y', labelsize =20)
