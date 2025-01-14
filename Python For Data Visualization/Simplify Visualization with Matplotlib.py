@@ -406,3 +406,55 @@ axes.plot(month_number, interest_paid, c = 'k');
 axes.plot(month_number, principal_paid, c = 'b');
 
 Matplotlib allows you to set grid lines to make your graph more visually appealing and to help distinguish quantities across the graph. It's also important to keep in mind that just because you can set grid lines doesn't mean you have to. You can also use a style of Matplotlib that has them in by default.
+
+# 6) Create legends
+
+***Plot legends*** ``assist in assigning meaning to your various plot elements``. It's therefore important to make sure your legend doesn't cover up your plot elements. 
+
+***MATLAB-style***
+
+We'll first start by utilizing Matplotlib's MATLAB-style syntax to create a plot legend. As you see in this image, the legend is not in an ideal location. 
+
+# Obviously the legend is not in an ideal location
+plt.plot(month_number, interest_paid, c='k', label = 'Interest')
+plt.plot(month_number, principial_paid, c='k', label = 'Principal')
+plt.legend()
+
+You can use the lock parameter to change where your legend is located. In this case, I'm telling it to go to the center right. 
+
+# At least the legend is not overlapping with the graph
+plt.plot(month_number, interest_paid, c='k', label = 'Interest')
+plt.plot(month_number, principial_paid, c='k', label = 'Principal')
+plt.legend(loc = 'center right')
+
+It's important to note you can also move your legend outside the plotting area. What the code here is doing is I'm moving the legend slightly outside to the right of my plot, because all the way to the right would be 1.00, and I'm moving it all the way at the base of my plot. And as you see here, my legend is outside the plotting area. 
+
+# You can move the legend outside of the plotting area.
+# At least the legend is not overlapping with the graph
+plt.plot(month_number, interest_paid, c='k', label = 'Interest')
+plt.plot(month_number, principial_paid, c='k', label = 'Principal')
+plt.legend(loc = (1.02,0) )
+
+***Object-orientid***
+
+Keep in mind, you can also use Matplotlib's object-oriented syntax to create a legend. In the case of the code over here, I'm doing axes.legend. 
+
+# Obviously the legend is not in an ideal location
+fig, axes = plt.subplots(nrows = 1, ncols = 1);
+axes.plot(month_number, interest_paid, c='k', label = 'Interest')
+axes.plot(month_number, principial_paid, c='k', label = 'Principal')
+axes.legend()
+
+Similar to Matplotlib's MATLAB-style syntax, the object-oriented syntax also allows you to move the legend's location. As you see here, I have the legend in the center right, and over here, just like before, I have it outside the plot. 
+
+# At least the legend is not overlapping with the graph
+fig, axes = plt.subplots(nrows = 1, ncols = 1);
+axes.plot(month_number, interest_paid, c='k', label = 'Interest')
+axes.plot(month_number, principial_paid, c='k', label = 'Principal')
+axes.legend( loc = "center right")
+
+# At least the legend is not overlapping with the graph
+fig, axes = plt.subplots(nrows = 1, ncols = 1);
+axes.plot(month_number, interest_paid, c='k', label = 'Interest')
+axes.plot(month_number, principial_paid, c='k', label = 'Principal')
+axes.legend( loc = (1.02, 0) )
