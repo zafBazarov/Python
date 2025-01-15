@@ -125,3 +125,65 @@ price_filter = df.loc[:, 'price'] <= 3000000
 
 df.loc[price_filter, 'price'].hist(bins =30,
                                     edgecolor ='black')
+
+
+# 3) Subplots
+
+***Subplots*** ``often useful to compare different subsets of your data side by side. ``
+
+To demonstrate this, we're going to visualize images. We're going to have our figures appear inline in the notebook, so we're specifying inline. We're going to import pandas, NumPy, and Matplotlib. 
+
+# The ``inline`` flag will use the appropriate backend to make figures appear inline in the not
+%matplotlib inline
+
+import pandas as pd
+import numpy as np
+
+# ``plt`` is an alias for the ``matplotlib.pyplot`` module
+import matlotlib.pyplot as plt
+
+***Load Data***
+
+The next thing we have to do is you have to load our dataset, and our dataset is the digits dataset from scikit-learn. They have arranged into a CSV file for convenience. The dataset consists of pixel intensity values for 1,797 images that are eight-by-eight pixels. This means that the dataset has 64 total values per image, and each image is labeled with a number from zero to nine. We're going to load our dataset into panda's data frame by using the read_csv method. 
+
+# Load digits dataset
+filename = 'digitsDataset.csv
+
+df =pd.read_csv(filename)
+
+With any dataset, it's always good to check the first couple rows to make sure everything loaded properly. 
+Columns zero to 63 are pixel intensity values for an eight-by-eight image. The label column is what the image is supposed to be. Each row in the dataset represents one image. 
+
+# Columns 0 to 63 are the pixel intensity values for an 8 by 8 image.
+# label column is what the image is supposed to be.
+df.head()
+
+***Show image***
+
+Before we can create a subplot, it's a good idea to know how to visualize one image. To get all the column names for the pixel intensity values, we're going to utilize the df.columns attribute, and what this slice does is it says we want every column except for the last column, which happens to be our labels. 
+
+pixel_colnames = df.columns[:1]
+
+pixel_colnames
+
+The next thing we're going to do is we're going to do df.lock. We're going to specify that we want the first image in our data dataset, and we want all of its pixel intensity values. I should note that this is not yet the correct form for viewing the images. As you can see, we don't yet have an eight-by-eight array. 
+
+# Get all columns except the label column for the first image
+image_values = df.loc[0, pixel_colnames].values
+
+# Thi is not correct format for viewing images
+image_values.shape
+
+A lesson you can take from this is that isn't important. Keep in mind that just because a dataset is stored in a certain way doesn't mean it was meant to be viewed that way. To fix this problem, we're going to utilize the reshape method to reshape it into an eight-by-eight array. 
+
+image_values.reshape(8,8)
+
+As it's not easy to understand pixel intensity values by looking at an array, let's visualize the image. To do this, we're going to utilize the imshow method, and we're going to specify that we want a gray color map. As you see here, this image looks like a zero. The reason why it looks a little blurry is because it's only an eight-by-eight image. 
+
+plt.imshow(image_values.reshape(8, 8), cmap = 'gray')
+
+*Not the correct way to format your data*
+plt.imshow(image_values.reshape(64, 1), cmap = 'gray')
+
+***Subplot Creation***
+            
