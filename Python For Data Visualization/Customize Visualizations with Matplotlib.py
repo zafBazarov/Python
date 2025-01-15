@@ -1,4 +1,6 @@
-# Create heatmaps
+
+
+# 1) Create heatmaps
 
 We will learn how to create heatmaps using matplotlib and Seaborn, a matplotlib wrapper. So what is a heatmap? 
 
@@ -61,3 +63,65 @@ It's important to keep in mind that you can also create a heatmap using pure mat
 #copy from original source
   
 It's important to note what you choose for your color palette can make your visualization more or less interpretable. Additionally, sometimes it's easier to use a matplotlib wrapper like Seaborn, as it involves less code, and it's easier to make it aesthetically pleasing.
+
+# 2) Histograms
+We'll learn how to create histograms using Matplotlib. When first evaluating a dataset, ``it's a common practice to create histograms to explore your data, as it can give you a general idea of what your data looks like``. 
+
+***Histogram*** is a summary of the variation in a measured variable. It shows the number of samples that occur in a category. A histogram is a type of frequency distribution. Histograms work by binning the entire range of values into a series of intervals and then counting how many values fall into each interval. While the intervals are often of equal size, they're not required to be. 
+
+If you look at our import statements, we have Matplotlib inline. We're going to import pandas as pd, as not only can we manipulate data with pandas, we'll see how to create a histogram using the plotting functionality of the Pandas library. We're also going to import matplotlib.pyplot as plt. And even though we'll be creating a histogram through the plotting functionality of the Pandas library, you can always use base matplotlib to tune your figure. 
+
+# The ``inline`` flag will use the appropriate backend to make figures appear inline in the not
+%matplotlib inline
+
+import pandas as pd
+
+# ``plt`` is an alias for the ``matplotlib.pyplot`` module
+import matlotlib.pyplot as plt
+
+***Load Data***
+
+The data that we'll use to demonstrate histograms is the house sales in King County USA dataset. We're going to load this data into a Pandas DataFrame by using pd.read_csv And as you can see, we have various features of a home in this data set. And what we'll be doing is visualizing a histogram of the price column. 
+
+df =pd.read_csv('kingCountyHouseData.csv')
+
+df.head()
+
+
+***Histograms using Pandas***
+To visualize, we can use the hist method. And as you can see, this is not very readable. 
+
+df['price'].head()
+
+# Using the default settings is not a good idea
+# Keep in mind that visualization are an iterative process.
+df['price'].hist()
+
+One way to fix this is by rotating our x tick labels. To do this, we can do plt.xticks and specify that we want the rotation to be 90 degrees. And as you can see, we no longer have our x tick labels overlapping. 
+# One solution is to rotate your xticklabels
+plt.xtocks(rotation =90)
+
+Alternatively, you could have changed the default plot style, as oftentimes, different plot styles have different defaults. And in this case, we're specifying the plot style to be seaborn. And as you can see, we don't have overlapping x tick labels. One problem with our current visualization is that we seem to have a lot of white space. This is most likely due to outliers. 
+
+# If you want a quick solution to make the xtocklabels readable,
+# try changing the plot style
+plt.style.use('seaborn')
+
+# Change the number of bins
+# Seems better, but we still have empty spaces
+df['price'].hist(bins =30)
+
+Oftentimes, you're only interested in a subset of your data. Say for example, you're only interested in visualizing a subset of your data of homes under $3 million. To remove homes under $3 million, we're going to do df.loc and specifying that we want the price column and that we only want homes under $3 million. We're going to assign this Pandas series of true-false values to the variable price filter. From there, we can utilize our price filter by doing df.loc, inserting our filter of true and false values, specifying that we only want to look at the price column, and then creating a histogram off it. As you can see, we have less white space in our figure. 
+
+# visualizing a subset of the data
+price_filter = df.loc[:, 'price'] <= 3000000
+df.loc[price_filter, 'price'].hist(bins =30)
+
+One important thing to keep in mind is that data visualization is an iterative process, so there's always something else you can tune. Say, for example, I want to be able to distinguish my bars from each other. You can do this by specifying the edge color. In this case, I want to be black. As you can see here, I can now distinguish my bars from each other. You can also keep on tuning your graph to be more and more visually appealing. Just make sure that it's worth the effort.
+
+# you can change the edgecolor and linewidth
+price_filter = df.loc[:, 'price'] <= 3000000
+
+
+df.loc[price_filter, 'price'].hist(bins =30,
+                                    edgecolor ='black')
