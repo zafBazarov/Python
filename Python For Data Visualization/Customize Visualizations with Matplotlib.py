@@ -186,4 +186,28 @@ plt.imshow(image_values.reshape(8, 8), cmap = 'gray')
 plt.imshow(image_values.reshape(64, 1), cmap = 'gray')
 
 ***Subplot Creation***
+
+We're now going to create a five-by-five subplot. The way to create a subplot is by utilizing the dot subplot command, specifying how many rows you want, how many columns you want. The one here is an index, so out of our five plots, this is saying that this is the first one. The next thing we have to do is we have to create our image values. This bit of code are the image values for our first image, as you can see here. What this code is doing is we're specifying that we want the first image and we want its label, and we are assigning it to the variable image_label. And then from here, we're visualizing our image, and as before, we're reshaping our array to be eight-by-eight. Next, we're going to insert a title on our plot, so that we know what the image is supposed to be of. From here, the next bit of code says that this is going to be the second image in our subplot. We also want the image at index one. We want the label for the image at index one, and similarly, we're going to do the same thing for the third image, the fourth image, and the fifth image. And as you see here, we have five plots side by side. As you've probably noticed in the code, we seem to have a lot of duplication of effort. 
+#copy from original source
+
+***Using a for loop***
+Let's eliminate that with a for loop. 
             
+# range (0, 5) produces a sequence of integers from 0
+# up to but not including 5
+list(range(0, 5))
+
+In this code, what range is doing is in the first iteration, zero is assigned temporarily to the variable index. We're doing one plus our index, which happens to be one, so we're saying that this is the first subplot. What this next code is doing is it's saying that we want all the pixel intensity values for the row with the index label of zero. In the next iteration of the loop, we're taking one, and we're temporarily assigning it to the variable index. We're doing one plus one, which is two, which is saying that this is the second subplot. And what this next bit of code is doing is it's saying that we want all the pixel intensity values for the index label of one. A similar process happens for the rest of the for loop. As you see here, we now have our images side by side with a lot less code. 
+
+# This is a lot less code
+
+plt.fgure(figsize = (10, 2))
+for index in range (0, 5):
+
+  plt.subplot(1, 5, 1+ index)
+  image_values = df.loc[index, pixel_colnames].values
+  image_label = df.loc[index, 'label']
+  plt.imshow(image_values.reshape(8, 8), cmap = 'gray')
+  plt.title('Label: ' + str(image_label))
+
+  ``It's important to note that there are cases where we can use a lot less code by utilizing for loops.``
